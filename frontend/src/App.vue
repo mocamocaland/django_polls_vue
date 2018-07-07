@@ -1,8 +1,11 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+  <v-app id="app">
+    <div id="app">
+      <v-btn>マテリアルボタン</v-btn>
+      <img src="./assets/logo.png">
+      <router-view/>
+    </div>
+  </v-app>
 </template>
 
 <script>
