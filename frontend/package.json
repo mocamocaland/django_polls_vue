@@ -2,7 +2,7 @@
   "name": "tutorial-spa",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "mocamoca <noi_kaas@yahoo.co.jp>",
+  "author": "mocamocaland <noi_kaas@yahoo.co.jp>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -16,7 +16,7 @@
   "dependencies": {
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.18"
+    "vuetify": "^1.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
