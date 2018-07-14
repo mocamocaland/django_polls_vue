@@ -9,7 +9,7 @@
                 <div>{{ data.questionText }}</div>
               </v-card-title>
               <v-card-text>
-                <div>{{ data.pubDate }}</div>
+                <div>{{ data.pubDate|printDate }}</div>
               </v-card-text>
             </v-card>
           </v-flex>
@@ -21,6 +21,7 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
 
 export default {
   name: 'PollIndex',
@@ -31,14 +32,20 @@ export default {
     }
   },
 
+  filters: {
+    printDate (val) {
+      return moment(val).locale('ja').format('YYYY年MM月DD日(ddd) HH時mm分ss秒')
+    },
+  },
+
   methods: {
     fetchData () {
       axios.get('http://localhost:8000/api/1.0/questions/').then(res => {
         this.questions = res.data.results
-
       })
     },
   },
+
   mounted () {
     this.fetchData()
   },
