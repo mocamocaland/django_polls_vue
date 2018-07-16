@@ -17,10 +17,10 @@
                     :value="choice.id">
                   </v-radio>
                 </v-radio-group>
-                <v-btn @click="doVote" color="success">投票</v-btn>
+                <v-btn @click="doVote" color="success" :diasbled="!voteEnable(data.choices)">投票</v-btn>
               </v-card-text>
               <v-card-text>
-                <div>{{ data.pubDate|printDate }}</div>
+               <div>{{ data.pubDate|printDate }}</div>
               </v-card-text>
             </v-card>
           </v-flex>
@@ -31,33 +31,42 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment'
 
 export default {
   name: 'PollIndex',
-
   data () {
     return {
       vote: null,
       questions: [],
     }
   },
-
   filters: {
     printDate (val) {
       return moment(val).locale('ja').format('YYYY年MM月DD日(ddd) HH時mm分ss秒')
     },
   },
-
   methods: {
     fetchData () {
-      axios.get('http://localhost:8000/api/1.0/questions/').then(res => {
+      this.$request.questions.list().then(res => {
         this.questions = res.data.results
       })
     },
+    doVote () {
+      if (!this.vote) {
+        return
+      }
+      this.$request.questions.vote(this.vote).then(res => {
+        this.fetchData()
+      })
+    },
+    voteEnable (choices) {
+      if (!this.vote) {
+        return false
+      }
+      return choices.some(x => x.id === this.vote)
+    },
   },
-
   mounted () {
     this.fetchData()
   },
