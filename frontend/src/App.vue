@@ -1,7 +1,10 @@
 <template>
   <v-app id="app">
     <v-navigation-drawer app></v-navigation-drawer>
-    <v-toolbar app></v-toolbar>
+    <v-toolbar app>
+      {{ isLoggedIn ? 'ログイン中' : 'ログアウト中' }}
+
+    </v-toolbar>
     <v-content>
       <v-container fluid>
         <router-view></router-view>
