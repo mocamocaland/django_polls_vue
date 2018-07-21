@@ -226,3 +226,17 @@ tutorial/__pycache__/wsgi.cpython-36.pyc
 frontend/package.json
 package-lock.json
 frontend/package-lock.json
+polls/migrations/__pycache__/__init__.cpython-36.pyc
+frontend/package.json
+frontend/package-lock.json
+polls/__pycache__/__init__.cpython-36.pyc
+polls/__pycache__/admin.cpython-36.pyc
+polls/__pycache__/api_urls.cpython-36.pyc
+polls/__pycache__/api_views.cpython-36.pyc
+polls/__pycache__/models.cpython-36.pyc
+polls/__pycache__/serializers.cpython-36.pyc
+polls/migrations/__pycache__/0001_initial.cpython-36.pyc
+tutorial/__pycache__/__init__.cpython-36.pyc
+tutorial/__pycache__/settings.cpython-36.pyc
+tutorial/__pycache__/urls.cpython-36.pyc
+tutorial/__pycache__/wsgi.cpython-36.pyc
