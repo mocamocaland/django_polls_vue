@@ -2,8 +2,8 @@
   <v-app id="app">
     <v-navigation-drawer app></v-navigation-drawer>
     <v-toolbar app>
-      {{ isLoggedIn ? 'ログイン中' : 'ログアウト中' }}
-
+      <router-link v-show="!isLoggedIn" :to="{name: 'Login'}">ログイン</router-link>
+      <v-btn v-show="isLoggedIn" @click="logout">ログアウト</v-btn>
     </v-toolbar>
     <v-content>
       <v-container fluid>
@@ -15,12 +15,24 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
   name: 'App',
+  computed: {
+    ...mapGetters(['isLoggedIn']),
+  },
+  created () {
+    this.tryLoggedIn()
+  },
+  methods: {
+    ...mapActions(['login', 'logout', 'tryLoggedIn']),
+  },
 }
 </script>
 
 <style>
+/*
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -29,4 +41,5 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+*/
 </style>

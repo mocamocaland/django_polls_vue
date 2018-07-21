@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import client from '@/api'
 
 Vue.use(Vuex)
 
@@ -10,20 +11,37 @@ const state = {
 }
 
 const mutations = {
-  loggedIn (state) {
+  loggedIn (state, token) {
     state.isLoggedIn = true
+    client.defaults.headers.common['Authorization'] = `JWT ${token}`
+    localStorage.setItem('token', token)
   },
   loggedOut (state) {
     state.isLoggedIn = false
+    delete client.defaults.headers.common['Authorization']
+    localStorage.clear()
   },
 }
 
 const actions = {
-  login ({commit}) {
-    commit('loggedIn')
+  login ({commit}, [username, password]) {
+    return client.auth.login(username, password).then(res => {
+      commit('loggedIn', res.data.token)
+      return res
+    })
   },
   logout ({commit}) {
     commit('loggedOut')
+  },
+  tryLoggedIn ({commit}) {
+    const token = localStorage.getItem('token')
+    if (token) {
+      client.auth.verify(token).then(() => {
+        commit('loggedIn', token)
+      }, () => {
+        localStorage.clear()
+      })
+    }
   },
 }
 
